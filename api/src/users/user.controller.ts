@@ -28,6 +28,13 @@ UserController.put("/:id", async (req: Request, res: Response) => {
 
   res.status(201).send(user);
 });
-UserController.get("/:id", UserService.remove);
+UserController.get("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { username, password } = req.body;
+  const userDTO = { username, password };
+  const user = await UserService.remove(+id);
+
+  res.status(201).send(user);
+});
 
 export default UserController;

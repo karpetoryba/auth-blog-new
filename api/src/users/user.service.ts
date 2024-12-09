@@ -3,7 +3,6 @@ import pool from "../config/database.config";
 import { IUser, IUserDTO } from "./user.types";
 
 // Define the `getAll` method in UserService
-
 const getAll = async (req: Request, res: Response) => {
   pool.query("SELECT * from users", function (error, results) {
     if (error) {
@@ -13,7 +12,6 @@ const getAll = async (req: Request, res: Response) => {
     res.status(200).send(results);
   });
 };
-
 // Define the `getOne` method in UserService
 const getOneByUsername = async (username: string): Promise<IUser | null> => {
   const query = "SELECT * FROM public.users WHERE username = $1";
@@ -28,6 +26,7 @@ const getOneByUsername = async (username: string): Promise<IUser | null> => {
 
   return user;
 };
+
 const getOneById = async (id: number): Promise<IUser | null> => {
   const query = "SELECT * FROM public.user WHERE id = $1";
   const values = [id];
@@ -75,35 +74,25 @@ const update = async (id: number, userDTO: IUserDTO) => {
 };
 
 // Define the `delete` method in UserService
-const remove = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  console.log("end point delete (id): ", id);
+const remove = async (id: number) => {
+  const query = "DELETE FROM public.users WHERE id = $1 RETURNING *"; // SQL query for deletion
+  const values = [id]; // Bind values for SQL query
 
-  const sqlDelete = "DELETE FROM users WHERE id = $1";
-  const sqlSelect = "SELECT * FROM users WHERE id = $1";
-  const values = [id];
+  try {
+    // Execute the query and capture the result
+    const result = await pool.query(query, values);
 
-  // Vérifier si l'id existe dans la base de données
-  pool.query(sqlSelect, values, (error, results) => {
-    if (error) {
-      res.status(500).send({ error: "Error while fetching data" });
-      return;
+    // Check if no rows were affected
+    if (!result || result.rows.length === 0) {
+      console.warn("User not found for deletion.");
     }
-    if (Array.isArray(results) && results.length === 0) {
-      res.status(404).send({ error: "User not found" });
-      return;
-    }
-  });
-
-  // Si l'id existe, on peut supprimer
-  pool.query(sqlDelete, values, (error, results) => {
-    if (error) {
-      res.status(500).send({ error: "Error while fetching data" });
-      return;
-    }
-
-    res.status(200).send({ message: "Success to delete" });
-  });
+    // Return the deleted user data on success
+    return { success: true, user: result.rows[0] };
+  } catch (error) {
+    // Log and handle errors
+    console.error("Error deleting user:", error);
+    return { success: false, message: "Internal server error" }; // Return failure on error
+  }
 };
 
 export default {

@@ -7,14 +7,23 @@ import logger from "./middleware/logger.middleware";
 import authMiddleware from "./middleware/auth.middleware";
 import AuthController from "./auth/auth.controller";
 import { IUser } from "./users/user.types";
+import { IPost } from "./posts/post.types";
 
 const app = express();
 const port = 8000;
-
+//IUser
 declare global {
   namespace Express {
     interface Request {
       user?: IUser;
+    }
+  }
+}
+//IPost
+declare global {
+  namespace Express {
+    interface Request {
+      post?: IPost;
     }
   }
 }
