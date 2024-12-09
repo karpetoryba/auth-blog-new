@@ -28,7 +28,7 @@ const getOneByUsername = async (username: string): Promise<IUser | null> => {
 };
 
 const getOneById = async (id: number): Promise<IUser | null> => {
-  const query = "SELECT * FROM public.user WHERE id = $1";
+  const query = "SELECT * FROM public.users WHERE id = $1";
   const values = [id];
 
   try {
@@ -75,7 +75,7 @@ const update = async (id: number, userDTO: IUserDTO) => {
 
 // Define the `delete` method in UserService
 const remove = async (id: number) => {
-  const query = "DELETE FROM public.users WHERE id = $1 RETURNING *"; // SQL query for deletion
+  const query = "DELETE FROM public.users WHERE id = $1"; // SQL query for deletion
   const values = [id]; // Bind values for SQL query
 
   try {
@@ -91,7 +91,7 @@ const remove = async (id: number) => {
   } catch (error) {
     // Log and handle errors
     console.error("Error deleting user:", error);
-    return { success: false, message: "Internal server error" }; // Return failure on error
+    return { success: false, message: "Internal server error" };
   }
 };
 

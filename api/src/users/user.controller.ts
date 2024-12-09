@@ -4,6 +4,7 @@ import UserService from "./user.service";
 const UserController = Router();
 
 UserController.get("/", UserService.getAll);
+
 UserController.post("/", async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const userDTO = { username, password };
@@ -28,7 +29,7 @@ UserController.put("/:id", async (req: Request, res: Response) => {
 
   res.status(201).send(user);
 });
-UserController.get("/:id", async (req: Request, res: Response) => {
+UserController.delete("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   const { username, password } = req.body;
   const userDTO = { username, password };

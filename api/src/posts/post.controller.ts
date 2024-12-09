@@ -21,7 +21,15 @@ PostController.get("/:id", async (req: Request, res: Response) => {
 
   res.send(post);
 });
-PostController.put("/:id", PostService.update);
+PostController.put("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { user_id, title, content } = req.body;
+  const postDTO = { user_id, title, content };
+  const post = await PostService.update(+id, postDTO);
+
+  res.status(201).send(post);
+});
+
 PostController.delete("/:id", PostService.remove);
 
 export default PostController;

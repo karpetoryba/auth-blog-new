@@ -46,50 +46,19 @@ const create = async (postDTO: IPostDTO) => {
 };
 
 // Define the `update` method in UserService
-const update = async (req: Request, res: Response) => {
-  const { id } = req.params;
+const update = async (id: number, postDTO: IPostDTO) => {
+  const query =
+    "UPDATE public.posts SET user_id = $1, title = $2, content = $3 WHERE id = $4 RETURNING *";
+  const values = [postDTO.user_id, postDTO.title, postDTO.content, id];
 
-  console.log("end point update (id): ", id);
-  console.log("end point update (body): ", req.body);
-
-  pool.query("SELECT * FROM posts WHERE id = $1", [id], (error, results) => {
-    console.log("results: ", results);
-    console.log("error: ", error);
-    if (error) {
-      console.log("error: ", error);
-      res.status(500).send({ error: "Error while fetching data" });
-      return;
-    }
-    if (Array.isArray(results) && results.length === 0) {
-      res.status(404).send({ error: "Posts not found" });
-      return;
-    }
-
-    if (Array.isArray(results) && results.length === 1) {
-      const currentPost = results[0];
-      const newPost = {
-        ...currentPost,
-        ...req.body,
-      };
-
-      console.log("newPost: ", newPost);
-
-      const sqlUpdate =
-        "UPDATE category SET , title= $1, content = *$2,image_path = $3 WHERE id = $4 RETURNING *";
-      const values = [newPost.title, newPost.content, newPost.image_path];
-
-      pool.query(sqlUpdate, values, (error, results) => {
-        if (error) {
-          res.status(500).send({ error: "Error while updating data" });
-          return;
-        }
-
-        res.status(200).send({ message: "Post updated successfully" });
-      });
-    }
-  });
-
-  // res.status(200).send({ message: "Travel updated successfully" });
+  try {
+    const result = await pool.query(query, values);
+    const user = result.rows[0];
+    return user;
+  } catch (error) {
+    console.error("Error updating user:", error);
+    return false;
+  }
 };
 // Define the `update` method in UserService
 const remove = async (req: Request, res: Response) => {
