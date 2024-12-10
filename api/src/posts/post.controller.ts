@@ -30,6 +30,13 @@ PostController.put("/:id", async (req: Request, res: Response) => {
   res.status(201).send(post);
 });
 
-PostController.delete("/:id", PostService.remove);
+PostController.delete("/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { user_id, title, content } = req.body;
+  const userDTO = { user_id, title, content };
+  const user = await PostService.remove(+id);
+
+  res.status(201).send(user);
+});
 
 export default PostController;
