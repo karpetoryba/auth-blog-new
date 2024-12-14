@@ -70,7 +70,6 @@ PostController.delete(
     try {
       const { id } = req.params;
 
-      // Удаление поста
       const result = await PostService.remove(+id);
 
       if (!result) {
@@ -78,7 +77,6 @@ PostController.delete(
         return;
       }
 
-      // Успешное удаление
       res.status(200).json({ message: "Post deleted successfully" });
     } catch (error) {
       console.error("Error deleting post:", error);
