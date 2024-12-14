@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import userService from "../users/user.service";
+
 dotenv.config();
 
 const authMiddleware = async (

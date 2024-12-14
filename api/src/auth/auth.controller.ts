@@ -15,6 +15,7 @@ AuthController.post("/signin", async (req: Request, res: Response) => {
     res.status(401).send({ message: "User not authenticated" });
   }
 });
+
 AuthController.post("/signup", async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const userDTO = { username, password };

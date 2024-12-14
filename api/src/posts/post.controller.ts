@@ -1,16 +1,25 @@
 import { Router, Request, Response } from "express";
 import PostService from "./post.service";
+import authMiddleware from "../middleware/auth.middleware";
+import { IUser } from "../users/user.types";
 
 const PostController = Router();
 
 PostController.get("/", PostService.getAll);
-PostController.post("/", async (req: Request, res: Response) => {
-  const { user_id, title, content } = req.body;
-  const postDTO = { user_id, title, content };
-  const post = await PostService.create(postDTO);
 
-  res.status(201).send(post);
-});
+PostController.post(
+  "/",
+  authMiddleware,
+  async (req: Request, res: Response) => {
+    const user = req.user as IUser;
+    const userId = user.id;
+    const { title, content } = req.body;
+    const postDTO = { user_id: userId, title, content };
+    const post = await PostService.create(postDTO);
+
+    res.status(201).send(post);
+  }
+);
 
 PostController.get("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -21,22 +30,61 @@ PostController.get("/:id", async (req: Request, res: Response) => {
 
   res.send(post);
 });
-PostController.put("/:id", async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { user_id, title, content } = req.body;
-  const postDTO = { user_id, title, content };
-  const post = await PostService.update(+id, postDTO);
+PostController.put(
+  "/:id",
+  authMiddleware,
 
-  res.status(201).send(post);
-});
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+      const user = req.user as IUser;
+      const userId = user.id;
+      const { title, content } = req.body;
 
-PostController.delete("/:id", async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { user_id, title, content } = req.body;
-  const userDTO = { user_id, title, content };
-  const user = await PostService.remove(+id);
+      if (!title || !content) {
+        res.status(400).json({ error: "Title and content are required" });
+        return;
+      }
 
-  res.status(201).send(user);
-});
+      const postDTO = { user_id: userId, title, content };
+
+      const post = await PostService.update(+id, postDTO);
+
+      if (!post) {
+        res.status(404).json({ error: "Post not found" });
+        return;
+      }
+
+      res.status(200).json(post);
+    } catch (error) {
+      console.error("Error updating post:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+);
+
+PostController.delete(
+  "/:id",
+  authMiddleware,
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const { id } = req.params;
+
+      // Удаление поста
+      const result = await PostService.remove(+id);
+
+      if (!result) {
+        res.status(404).json({ error: "Post not found" });
+        return;
+      }
+
+      // Успешное удаление
+      res.status(200).json({ message: "Post deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  }
+);
 
 export default PostController;

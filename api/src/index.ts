@@ -11,6 +11,7 @@ import { IPost } from "./posts/post.types";
 
 const app = express();
 const port = 8000;
+
 //IUser
 declare global {
   namespace Express {
@@ -49,4 +50,3 @@ app.get("/private", authMiddleware, (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-//
