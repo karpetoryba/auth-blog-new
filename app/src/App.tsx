@@ -12,7 +12,7 @@ function App() {
           <Link to="/login" className="hover:text-pink-300">
             Login
           </Link>
-          <Link to="/" className="hover:text-pink-300">
+          <Link to="/home" className="hover:text-pink-300">
             Home
           </Link>
           <Link to="/signup" className="hover:text-pink-300">
@@ -23,7 +23,7 @@ function App() {
       <div className="container mx-auto mt-10">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage />} />
         </Routes>
       </div>
