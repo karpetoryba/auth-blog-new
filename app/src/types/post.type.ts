@@ -7,6 +7,9 @@ export type IPost = {
 };
 
 export type IPostDTO = {
+  user_id: number;
+  id: number;
   title: string;
   content: string;
+  creates_at: string;
 };

@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import SigninPage from "./pages/auth/SigninPage";
 import SignupPage from "./pages/auth/SignupPage";
 import PostListPage from "./pages/Post/PostListPage";
+import SinglePost from "./pages/Post/SinglePost";
 
 function App() {
   return (
@@ -35,6 +36,12 @@ function App() {
           >
             post list
           </Link>
+          <Link
+            to="/id"
+            className="hover:text-purple-300 transition duration-200"
+          >
+            singlepost
+          </Link>
         </div>
       </nav>
 
@@ -45,6 +52,7 @@ function App() {
           <Route path="/home" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/postlist" element={<PostListPage />} />
+          <Route path="/:id" element={<SinglePost />} />
         </Routes>
       </div>
     </BrowserRouter>
