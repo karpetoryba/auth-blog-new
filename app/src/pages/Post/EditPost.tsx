@@ -48,24 +48,46 @@ const EditPost = () => {
         title: post.title,
         content: post.content,
       });
-      setMessage("Post updated successfully.");
-      navigate(`/${post.id}`); // Redirect to the post details page
+      setMessage("✅ Post updated successfully.");
+      setTimeout(() => setMessage(""), 2000); // Clear message after 2 seconds
+      setTimeout(() => navigate(`/${post.id}`), 1500); // Redirect to the post details page
     } catch (error) {
       console.error("Error updating post:", error);
-      setMessage("Error updating post.");
+      setMessage("❌ Error updating post.");
+      setTimeout(() => setMessage(""), 2000); // Clear message after 2 seconds
     }
   };
 
-  if (!post) return <div className="text-center">Loading post...</div>;
+  if (!post)
+    return (
+      <div className="text-center text-xl text-gray-700">Loading post...</div>
+    );
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      {message && <p className="text-center text-red-500">{message}</p>}
-      <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md border">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">Edit Post</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="title" className="block text-gray-700 font-medium">
+    <div className="min-h-screen bg-gradient-to-b from-indigo-100 to-purple-300 flex items-center justify-center p-6 relative">
+      {message && (
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white shadow-md border px-4 py-2 rounded-lg animate-slide-down z-50">
+          <p
+            className={`text-sm ${
+              message.includes("successfully")
+                ? "text-green-700"
+                : "text-red-700"
+            }`}
+          >
+            {message}
+          </p>
+        </div>
+      )}
+      <div className="max-w-4xl w-full bg-white shadow-xl rounded-2xl p-8 relative">
+        <h1 className="text-4xl font-bold text-purple-800 text-center mb-6">
+          ✏️ Edit Your Post
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="title"
+              className="block text-lg font-medium text-gray-700 mb-2"
+            >
               Title
             </label>
             <input
@@ -74,14 +96,15 @@ const EditPost = () => {
               name="title"
               value={post.title}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-purple-300"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
+              placeholder="Enter your post title"
               required
             />
           </div>
-          <div className="mb-4">
+          <div>
             <label
               htmlFor="content"
-              className="block text-gray-700 font-medium"
+              className="block text-lg font-medium text-gray-700 mb-2"
             >
               Content
             </label>
@@ -90,17 +113,27 @@ const EditPost = () => {
               name="content"
               value={post.content}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-purple-300"
-              rows={5}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
+              rows={6}
+              placeholder="Write your post content here..."
               required
             ></textarea>
           </div>
-          <button
-            type="submit"
-            className="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600"
-          >
-            Save Changes
-          </button>
+          <div className="flex justify-between items-center">
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="px-4 py-2 bg-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-400 transition"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-6 py-3 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition focus:outline-none focus:ring-2 focus:ring-purple-400"
+            >
+              Save Changes
+            </button>
+          </div>
         </form>
       </div>
     </div>

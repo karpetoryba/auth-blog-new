@@ -11,37 +11,33 @@ function App() {
   return (
     <BrowserRouter>
       {/* Navigation Bar */}
-      <nav className="flex items-center justify-between p-6 bg-purple-600 text-white shadow-md">
-        <div className="flex items-center space-x-6 text-lg font-medium">
-          <Link
-            to="/login"
-            className="hover:text-purple-300 transition duration-200"
-          >
-            Login
-          </Link>
+      <nav className="flex items-center justify-between p-6 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-lg">
+        <div className="flex items-center space-x-6 text-lg font-semibold">
           <Link
             to="/home"
             className="hover:text-purple-300 transition duration-200"
           >
-            Home
-          </Link>
-          <Link
-            to="/signup"
-            className="hover:text-purple-300 transition duration-200"
-          >
-            Signup
+            <span className="text-xl font-bold">MyBlog</span>
           </Link>
           <Link
             to="/postlist"
             className="hover:text-purple-300 transition duration-200"
           >
-            post list
+            Post List
+          </Link>
+        </div>
+        <div className="flex items-center space-x-6 text-lg">
+          <Link
+            to="/login"
+            className="bg-white text-purple-600 px-4 py-2 rounded-lg shadow-md hover:bg-purple-300 hover:text-white transition duration-300"
+          >
+            Login
           </Link>
           <Link
-            to="/id"
-            className="hover:text-purple-300 transition duration-200"
+            to="/signup"
+            className="bg-purple-700 px-4 py-2 rounded-lg shadow-md hover:bg-purple-800 transition duration-300"
           >
-            singlepost
+            Sign Up
           </Link>
         </div>
       </nav>
@@ -57,6 +53,13 @@ function App() {
           <Route path="/edit/:id" element={<EditPost />} />
         </Routes>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-purple-600 text-white py-6 mt-12">
+        <div className="container mx-auto text-center text-sm">
+          &copy; 2024 MyBlog. All rights reserved.
+        </div>
+      </footer>
     </BrowserRouter>
   );
 }
