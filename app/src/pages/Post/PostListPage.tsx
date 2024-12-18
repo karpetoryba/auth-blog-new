@@ -28,7 +28,7 @@ const PostListPage = () => {
   return (
     <div className="relative bg-white py-4 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-16 z-10 whitespace-nowrap animate-marquee text-purple-600 text-4xl font-extrabold uppercase">
-        Welcome to My Blog! Explore, Learn, and Share! 🌟
+        Bienvenue sur My Blog! Explorez, apprenez et partagez ! 🌟
       </div>
 
       <div className="mt-20 container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 relative">
