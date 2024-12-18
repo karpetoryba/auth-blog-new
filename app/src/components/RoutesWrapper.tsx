@@ -5,6 +5,7 @@ import SignupPage from "../pages/auth/SignupPage";
 import PostListPage from "../pages/Post/PostListPage";
 import SinglePost from "../pages/Post/SinglePost";
 import EditPost from "../pages/Post/EditPost";
+import WelcomePage from "../pages/WelcomePage";
 
 const RoutesWrapper = () => {
   return (
@@ -16,6 +17,7 @@ const RoutesWrapper = () => {
         <Route path="/postlist" element={<PostListPage />} />
         <Route path="/:id" element={<SinglePost />} />
         <Route path="/edit/:id" element={<EditPost />} />
+        <Route path="/" element={<WelcomePage />} />
       </Routes>
     </div>
   );
