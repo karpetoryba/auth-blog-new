@@ -11,6 +11,7 @@ PostController.post(
   "/",
   authMiddleware,
   async (req: Request, res: Response) => {
+    console.log(req.body);
     const user = req.user as IUser;
     const userId = user.id;
     const { title, content } = req.body;

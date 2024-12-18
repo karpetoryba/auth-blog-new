@@ -1,30 +1,50 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
+import SigninPage from "./pages/auth/SigninPage";
+import SignupPage from "./pages/auth/SignupPage";
+import PostListPage from "./pages/Post/PostListPage";
 
 function App() {
   return (
     <BrowserRouter>
-      <nav className="flex items-center justify-between p-4 bg-gray-800 text-pink-400">
-        <div className="flex space-x-4">
-          <Link to="/login" className="hover:text-pink-300">
+      {/* Navigation Bar */}
+      <nav className="flex items-center justify-between p-6 bg-purple-600 text-white shadow-md">
+        <div className="flex items-center space-x-6 text-lg font-medium">
+          <Link
+            to="/login"
+            className="hover:text-purple-300 transition duration-200"
+          >
             Login
           </Link>
-          <Link to="/home" className="hover:text-pink-300">
+          <Link
+            to="/home"
+            className="hover:text-purple-300 transition duration-200"
+          >
             Home
           </Link>
-          <Link to="/signup" className="hover:text-pink-300">
+          <Link
+            to="/signup"
+            className="hover:text-purple-300 transition duration-200"
+          >
             Signup
+          </Link>
+          <Link
+            to="/postlist"
+            className="hover:text-purple-300 transition duration-200"
+          >
+            post list
           </Link>
         </div>
       </nav>
-      <div className="container mx-auto mt-10">
+
+      {/* Main Content */}
+      <div className="container mx-auto mt-12 px-6 lg:px-12">
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<SigninPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/postlist" element={<PostListPage />} />
         </Routes>
       </div>
     </BrowserRouter>

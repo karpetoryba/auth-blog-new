@@ -42,32 +42,31 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-black">
-      <div className="w-full max-w-lg p-10 bg-gray-900 rounded-lg shadow-lg">
-        <h1 className="text-4xl font-bold text-center text-pink-500 mb-8">
+    <div className="min-h-screen bg-white text-gray-900 flex justify-center items-center">
+      <div className="max-w-4xl w-full bg-lavender-50 shadow-lg sm:rounded-lg flex flex-col p-10">
+        <h1 className="text-4xl font-bold text-center text-purple-600 mb-8">
           Sign Up
         </h1>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         {success && (
           <p className="text-green-500 text-center mb-4">{success}</p>
         )}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="w-full">
           <div className="mb-6">
-            <label className="block text-pink-300 mb-2" htmlFor="username">
+            <label className="block text-purple-500 mb-2" htmlFor="username">
               Username
             </label>
             <input
-              type="text"
               id="username"
               value={formData.username}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-black text-pink-500 border border-pink-500 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full px-4 py-3 bg-white text-purple-600 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="Enter your username"
               required
             />
           </div>
           <div className="mb-6">
-            <label className="block text-pink-300 mb-2" htmlFor="email">
+            <label className="block text-purple-500 mb-2" htmlFor="email">
               Email
             </label>
             <input
@@ -75,13 +74,13 @@ const SignupPage = () => {
               id="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-black text-pink-500 border border-pink-500 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full px-4 py-3 bg-white text-purple-600 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="Enter your email"
               required
             />
           </div>
           <div className="mb-6">
-            <label className="block text-pink-300 mb-2" htmlFor="password">
+            <label className="block text-purple-500 mb-2" htmlFor="password">
               Password
             </label>
             <input
@@ -89,21 +88,21 @@ const SignupPage = () => {
               id="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-3 bg-black text-pink-500 border border-pink-500 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full px-4 py-3 bg-white text-purple-600 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
               placeholder="Enter your password"
               required
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-pink-500 text-black font-bold rounded hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="w-full py-3 bg-purple-600 text-white font-bold rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-400"
           >
             Sign Up
           </button>
         </form>
-        <p className="text-center text-pink-300 mt-6">
+        <p className="text-center text-purple-500 mt-6">
           Already have an account?{" "}
-          <Link to="/login" className="text-pink-500 hover:underline">
+          <Link to="/login" className="text-purple-600 hover:underline">
             Login
           </Link>
         </p>
