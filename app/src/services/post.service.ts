@@ -35,7 +35,7 @@ export const create = async (post: IPost): Promise<IPost> => {
 export const update = async (id: string, post: IPostDTO): Promise<IPostDTO> => {
   const response = await fetch(`${API_URL}/posts/${id}`, {
     method: "PUT",
-    headers: getAuthHeaders(), // Добавляем авторизацию
+    headers: getAuthHeaders(),
     body: JSON.stringify(post),
   });
 
@@ -52,9 +52,7 @@ export const update = async (id: string, post: IPostDTO): Promise<IPostDTO> => {
 export const remove = async (id: string): Promise<void> => {
   const response = await fetch(`${API_URL}/posts/${id}`, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: getAuthHeaders(), // Используем заголовки авторизации
   });
 
   if (!response.ok) {
