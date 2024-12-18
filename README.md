@@ -1,78 +1,21 @@
-#TODO
--add CURS BDD
--edit services for user and post
+# MyBlog 🌟
 
-- edit controller for user and post
-- Protect route POST/ posts/ (create post)
-- Protect route DELETE / post/:id (delete post)
-- Protect route UPDATE /posts/:id (update post)
+Bienvenue sur **MyBlog**, une plateforme pour explorer, partager et apprendre grâce à des articles inspirants. Ce projet est construit avec **React**, **Tailwind CSS** et utilise une architecture moderne avec une attention particulière à la simplicité et à la convivialité.
 
-#TODO 2 (RELATION)
+## Fonctionnalités 🚀
 
-- Create into db relation use> (OneToMany)
-  -add user relation to insert new post
-- Check owner of post when delete or update
+- **Page d'accueil** : Un accueil chaleureux avec des informations clés et un appel à l'action.
+- **Liste des articles** : Une page dédiée aux meilleurs articles de la communauté.
+- **Connexion/Inscription** : Fonctionnalités pour s'inscrire et se connecter à votre compte.
+- **Édition des articles** : Modifiez facilement vos articles grâce à une interface utilisateur intuitive.
+- **Design moderne** : Utilisation de Tailwind CSS pour une expérience utilisateur fluide et réactive.
 
-#Back (API)
+---
 
-- express
-  -postgres
+## Installation 🔧
 
-## Routes
-
--users (CRUD)
--posts (CRUD)
-
-## Tables
-
-### User
-
-- id [int PK]
-  -username [varchar]
-  -password [varchar]
-  -email [varchar]
-  -creates_at [timestamp]
-
-### Post
-
-- id [Ink PK]
-- user_id [Int FK] (Many To One)
-- title [varchar]
-- content [varchar]
-- creates_at [timestamp]
-  -image_path[varchar]
-
-#Step to init project (Back)
-
-- create folred (api)
-  -npm init
-  -typescript init
-  -install dependencies (express, typescript, ts-node-dev, nodemon, dotenv)
-  -create files and folders project(index.ts, folder src)
-  -create routes (users, posts)
-- test with Postman
-  -config docker-compose (service: postgres, admoner)
-  -up containers
-  -create database and tables
-  -install dependencies postgres
-  -connecnt db
-
-## folder erchitecture (api)
-
--packages.json
--tsconfig.json
--docker-compose.yml
--.env
--.gitignore
-
--src/
-
-- -index.ts
-- routes/
-- controllers/
-  -config/
-  -db.ts
-
-# auth-blog-2
-
-# auth-blog-new
+1. **Clonez le dépôt** :
+   ```bash
+   git clone https://github.com/username/MyBlog.git
+   cd MyBlog
+   ```
