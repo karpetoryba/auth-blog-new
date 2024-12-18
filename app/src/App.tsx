@@ -5,6 +5,7 @@ import SigninPage from "./pages/auth/SigninPage";
 import SignupPage from "./pages/auth/SignupPage";
 import PostListPage from "./pages/Post/PostListPage";
 import SinglePost from "./pages/Post/SinglePost";
+import EditPost from "./pages/Post/EditPost";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/postlist" element={<PostListPage />} />
           <Route path="/:id" element={<SinglePost />} />
+          <Route path="/edit/:id" element={<EditPost />} />
         </Routes>
       </div>
     </BrowserRouter>

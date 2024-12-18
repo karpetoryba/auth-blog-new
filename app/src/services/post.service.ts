@@ -35,11 +35,17 @@ export const create = async (post: IPost): Promise<IPost> => {
 export const update = async (id: string, post: IPostDTO): Promise<IPostDTO> => {
   const response = await fetch(`${API_URL}/posts/${id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers: getAuthHeaders(), // Добавляем авторизацию
     body: JSON.stringify(post),
   });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => null);
+    throw new Error(
+      error?.message || `Error: ${response.status} ${response.statusText}`
+    );
+  }
+
   return await response.json();
 };
 

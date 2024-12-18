@@ -39,13 +39,9 @@ const SinglePost = () => {
 
     try {
       await remove(id);
-      setMessage("Post deleted successfully.");
-      setMessageType("success");
       navigate("/");
     } catch (error) {
-      console.error("Error deleting post:", error);
-      setMessage("Error deleting post.");
-      setMessageType("error");
+      console.log("Success to delete", error);
     }
   };
 
