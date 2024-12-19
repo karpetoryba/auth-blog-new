@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom"; // import useNavigate
 import { toast } from "sonner";
 import { create, findOneById } from "../../services/post.service";
 import { IPost } from "../../types/post.type";
@@ -18,6 +18,7 @@ const FormPost = ({ fetchPosts }: FormPostsProps) => {
   const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("access_token");
+  const navigate = useNavigate(); //useNavigate
 
   useEffect(() => {
     if (!token) {
@@ -75,11 +76,11 @@ const FormPost = ({ fetchPosts }: FormPostsProps) => {
 
     setLoading(true);
     try {
-      console.log("Submit create");
       await create(credentials as IPost);
 
       if (fetchPosts) fetchPosts();
       toast.success("✅ Post sauvegardé avec succès !");
+      navigate("/postlist"); //  on va sur le page Postlist
     } catch (error) {
       console.log("Error: ", error);
       toast.error("❌ Une erreur est survenue lors de la sauvegarde du post.");
