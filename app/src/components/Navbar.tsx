@@ -50,6 +50,12 @@ const Navbar = () => {
             >
               Сréer un compte
             </Link>
+            <Link
+              to="/profil"
+              className="bg-purple-700 px-4 py-2 rounded-lg shadow-md hover:bg-purple-800 transition duration-300"
+            >
+              profil
+            </Link>
           </>
         ) : (
           <button

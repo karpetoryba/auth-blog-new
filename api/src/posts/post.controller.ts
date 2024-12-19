@@ -31,6 +31,28 @@ PostController.get("/:id", async (req: Request, res: Response) => {
 
   res.send(post);
 });
+
+//PostController.get("/:id", async (req: Request, res: Response) => {
+//const { id } = req.params;
+
+//if (Number(id)) {
+////return res.status(400).send("Invalid user ID");
+//}
+
+//try {
+// const posts = await PostService.getByUserId(Number(id));
+
+//if (!posts || posts.length === 0) {
+// return res.status(404).send("No posts found for this user");
+// }
+
+//res.json(posts);
+//} catch (error) {
+//console.error("Error fetching posts:", error);
+//res.status(500).send("An error occurred while fetching posts");
+//}
+//});
+
 PostController.put(
   "/:id",
   authMiddleware,

@@ -6,6 +6,7 @@ import PostListPage from "../pages/Post/PostListPage";
 import SinglePost from "../pages/Post/SinglePost";
 import EditPost from "../pages/Post/EditPost";
 import WelcomePage from "../pages/WelcomePage";
+import UserProfile from "../pages/User/UserProfile";
 
 const RoutesWrapper = () => {
   return (
@@ -18,6 +19,7 @@ const RoutesWrapper = () => {
         <Route path="/:id" element={<SinglePost />} />
         <Route path="/edit/:id" element={<EditPost />} />
         <Route path="/" element={<WelcomePage />} />
+        <Route path="/profile" element={<UserProfile />} />
       </Routes>
     </div>
   );
