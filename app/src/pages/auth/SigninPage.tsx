@@ -45,14 +45,14 @@ const SigninPage = () => {
         <form onSubmit={handleSubmit} className="w-full">
           <div className="mb-6">
             <label className="block text-purple-500 mb-2" htmlFor="username">
-              Email
+              Username
             </label>
             <input
               id="username"
               value={formData.username}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-white text-purple-600 border border-purple-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400"
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               required
             />
           </div>

@@ -67,7 +67,7 @@ const SignupPage = () => {
           </div>
           <div className="mb-6">
             <label className="block text-purple-500 mb-2" htmlFor="email">
-              Username
+              Email
             </label>
             <input
               type="email"
