@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate(); // pour naviger
 
   // Vérifiez si l'utilisateur est autorisé
   useEffect(() => {
@@ -13,7 +14,8 @@ const Navbar = () => {
   // Fonction de déconnexion
   const handleLogout = () => {
     localStorage.removeItem("access_token"); // Supprime le token
-    setIsAuthenticated(false); // // Réinitialise l'état d'autorisation
+    setIsAuthenticated(false); // Réinitialise l'état d'autorisation
+    navigate("/");
   };
 
   return (
